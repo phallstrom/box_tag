@@ -7,7 +7,7 @@ module ActionView
     module TagHelper
       include ERB::Util
 
-      def box_tag(name = 'default', options = nil, &block)
+      def box_tag(name = 'default', options = {}, &block)
         if name.is_a?(Hash)
           options = name
           name = 'default'
