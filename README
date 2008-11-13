@@ -1,0 +1,28 @@
+BoxTag
+======
+
+Adds a 'box_tag' method which works similarly to 'content_tag', but instead of generating
+an HTML tag, renders the named partials around the content passed in the block.
+
+
+Example
+=======
+
+<% box_tag(:fancy) do -%>
+  some fancy content here including standard ERB stuff
+<% end %>
+
+The above will render the partial 'boxes/_fancy_top.html.erb', then capture the block content,
+then render the partial 'boxes/_fancy_bottom.html.erb'.
+
+<% box_tag(:fancy, :id => 'domid') do -%>
+  the partials can now access :id by referencing options[:id].
+  this is true for any option passed.
+<% end %>
+
+<% box_tag(:class => 'foo') do -%>
+  if you do not specify the box as the first argument it will assume you mean
+  box_tag(:default, :class => 'foo').
+<% end %>
+
+Copyright (c) 2008 Philip Hallstrom <philip@pjkh.com>, released under the MIT license
