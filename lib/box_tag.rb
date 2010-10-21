@@ -17,7 +17,11 @@ module ActionView
         content += capture(&block) if block_given?
         content += render :partial => "boxes/#{name}_bottom", :locals => {:options => options}, :layout => false
         
-        block_called_from_erb?(block) ? concat(content) : content
+        if respond_to?('block_called_from_erb?')
+          block_called_from_erb?(block) ? concat(content) : content
+        else
+          content.html_safe
+        end
       end
 
     end
