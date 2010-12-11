@@ -7,7 +7,7 @@ In Rails 3, one can render a partial using a custom layout.  That is, you can do
 So you can skip this plugin and add the following helper and get the same functionality.  The only change
 that needs to be made is to join the "top" and "bottom" partials together and put a "<%= yield %>" where they meet.
 
-def box_for(box = 'default', options = {}, &block)
+def box_tag(box = 'default', options = {}, &block)
   if box.is_a? Hash
     options = box.dup
     box = 'default'
