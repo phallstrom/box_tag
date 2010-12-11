@@ -1,3 +1,28 @@
+Rails 3!
+========
+In Rails 3, one can render a partial using a custom layout.  That is, you can do this:
+
+<%= render :partial => "user", :layout => "administrator", :locals => { :user => administrator } %>
+
+So you can skip this plugin and add the following helper and get the same functionality.  The only change
+that needs to be made is to join the "top" and "bottom" partials together and put a "<%= yield %>" where they meet.
+
+def box_for(box = 'default', options = {}, &block)
+  if box.is_a? Hash
+    options = box.dup
+    box = 'default'
+  end
+  render(:layout => "boxes/#{box}", :locals => { :options => options }) do
+    capture(&block) if block_given?
+  end
+end
+
+One upside to doing it this way is you can use HAML for your views.  This plugin won't work with HAML as HAML closes all if it's tags
+and this plugin explicitly leaves some open.
+
+See 'Rendering partials with layouts' at http://api.rubyonrails.org/classes/ActionView/Partials.html for more information.
+
+
 BoxTag
 ======
 
